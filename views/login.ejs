@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="src/css/login.css" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="container">
+			<header class="login__header">
+				<img class="header__icon" src="src/rkdeofuf.jpg" />
+				<div class="header__name">Dwitter</div>
+			</header>
+			<section class="login__main">
+				<form class="loginform" action="/login" method="post">
+					<input type="text" id="id" name="id" class="id" placeholder="ID" />
+					<input
+						type="text"
+						id="nickname"
+						name="nickname"
+						class="nickname"
+						placeholder="Nickname"
+					/>
+					<input
+						type="password"
+						id="password"
+						name="password"
+						class="password"
+						placeholder="Password"
+					/>
+					<input
+						type="password"
+						id="password2"
+						name="password2"
+						class="password2"
+						placeholder="Password check"
+					/>
+					<input type="submit" name="submit" id="submit" value="Signin!" />
+				</form>
+			</section>
+		</div>
+		<script src="src/clients/login.js"></script>
+	</body>
+</html>

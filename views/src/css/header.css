@@ -1,0 +1,14 @@
+.header__icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  max-width: 800px;
+  height: 100px;
+  background-color: beige;
+}
