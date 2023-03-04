@@ -1,14 +1,28 @@
-import { createUniqueId } from "./factory.js";
-
-
-
+import { createUniqueId } from '../controllers/factory.js';
+import { signinCheck } from '../controllers/signincontroller.js';
 export const getSignin = (req, res, next) => {
-  console.log(createUniqueId());
-  res.send("getSignin");
-}
-
+	return res.render('signin');
+};
 
 export const postSignin = (req, res, next) => {
-  console.log("postsignin");
-  res.send("postSignin");
-}
+	const { id, password } = req.body;
+	const {result, message} = signinCheck(id, password);
+  if(!result){
+    //when the login trying got failed.
+    // messag will be used for error message
+    console.log(message);
+    return res.render("signin",{message});
+  }
+
+  // the result must be user information(object)
+  console.log(result, message);
+  
+  // TO DO: useing session
+
+  // put userInfo in session, login state as well.
+
+  req.session.login = true;
+  req.session.user = {...result}
+  
+	return res.redirect('/');
+};

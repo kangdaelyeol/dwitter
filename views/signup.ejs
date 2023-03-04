@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="src/css/login.css" />
+		<link rel="stylesheet" href="src/css/signup.css" />
 		<title>Document</title>
 	</head>
 	<body>
@@ -14,14 +14,15 @@
 				<div class="header__name">Dwitter</div>
 			</header>
 			<section class="login__main">
-				<form class="loginform" action="/login" method="post">
-					<input type="text" id="id" name="id" class="id" placeholder="ID" />
+				<form class="loginform" action="/signup" method="post">
+					<input type="text" id="id" name="id" class="id" placeholder="ID" required/>
 					<input
 						type="text"
 						id="nickname"
 						name="nickname"
 						class="nickname"
 						placeholder="Nickname"
+						required
 					/>
 					<input
 						type="password"
@@ -29,6 +30,7 @@
 						name="password"
 						class="password"
 						placeholder="Password"
+						required
 					/>
 					<input
 						type="password"
@@ -36,8 +38,9 @@
 						name="password2"
 						class="password2"
 						placeholder="Password check"
+						required
 					/>
-					<input type="submit" name="submit" id="submit" value="Signin!" />
+					<input type="submit" name="submit" id="submit" value="Sign Up!" />
 				</form>
 			</section>
 		</div>

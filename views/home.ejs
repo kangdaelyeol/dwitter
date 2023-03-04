@@ -17,6 +17,15 @@
 	</head>
 	<body>
 		<%- include("includes/header"); %>
+		<div class="makingcomment">
+			<form class="commment__form" method="post" action="/comment" >
+				<input type="text" id="comment" placeholder="=Comment" required />
+				<input type="submit" value="Submit!" />
+			</form>
+		</div>
+		<div class="comments">
+
+		</div>
 		<h1>hello world</h1>
 	</body>
 </html>

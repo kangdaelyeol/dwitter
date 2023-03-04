@@ -4,7 +4,7 @@
   accountId: String
   password: String
   nickname: String
-  messages: Array[message(ref:message)]
+  comments: Array[message(ref:message)]
   profile: String
 */
 

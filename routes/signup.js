@@ -1,11 +1,11 @@
-import { createUser } from '../controllers/logincontroller.js';
+import { createUser } from '../controllers/signupcontroller.js';
 import User from '../models/user.js';
 
-export const getLogin = (req, res, next) => {
-	res.render('login');
+export const getSignup = (req, res, next) => {
+	res.render('signup');
 };
 
-export const postLogin = (req, res, next) => {
+export const postSignup = (req, res, next) => {
 	const body = req.body;
 
 	// create User sequence

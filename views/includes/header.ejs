@@ -4,6 +4,17 @@
 		<div class="header__name">Dwitter</div>
 	</div>
 	<div class="header__right">
-		<div class="header__login"><a href="/login">Login</a>≈</div>
+		 <% if (login === true) { %>
+		<div class="header__alltweets">
+			<a href="/alltweets" class="alltweets">All Tweets</a>
+		</div>
+		<div class="header__mytweet">
+			<a href="/mytweets" class="mytweets">My Tweets</a>
+		</div>
+		<% } %> <% if (login === true) { %>
+		<div class="header__logout"><a href="/signout">Logout</a></div>
+		<% } else { %>
+		<div class="header__login"><a href="/signin">Login</a></div>
+		<% } %>
 	</div>
 </header>

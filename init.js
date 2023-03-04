@@ -1,9 +1,13 @@
 import express from 'express';
 import { getSignin, postSignin } from './routes/signin.js';
-import { getLogin, postLogin } from './routes/login.js';
+import { getSignup, postSignup } from './routes/signup.js';
+import { getSignout } from './routes/signout.js';
+import { postComment } from './routes/comment.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import multer from "multer";
+import cookieParser from 'cookie-parser';
+import sessions from "express-session";
 
 /*
    definition of variuables for path
@@ -15,20 +19,36 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const upload = multer({dest: "src/"})
+const sessionOptions = sessions(
+   {
+      secret:"rkdeofuf",
+      saveUninitialized: false,
+      cookie: {
+         maxAge: 1000 * 60 * 60 * 24
+      },
+      resave: false
+   }
+)
 
 // set up essential middwares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(sessionOptions);
+
 
 app.set('view engine', 'ejs');
 app.use('/src', express.static(path.join(__dirname, 'views', 'src')));
 
 app.get('/', (req, res) => {
-	res.render('home.ejs');
+   console.log(req.session)
+	res.render('home.ejs', {user: req.session?.user, login: req.session?.login});
 });
 
+app.route('/signup').get(getSignup).post(postSignup);
 app.route('/signin').get(getSignin).post(postSignin);
-app.route('/login').get(getLogin).post(postLogin);
+app.route("/signout").get(getSignout);
+app.route("/comment").post(postComment);
 
 // if it's wrong access
 
