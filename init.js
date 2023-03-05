@@ -41,7 +41,8 @@ app.set('view engine', 'ejs');
 app.use('/src', express.static(path.join(__dirname, 'views', 'src')));
 
 app.get('/', (req, res) => {
-   console.log(req.session)
+   console.dir(req.session)
+   const comments = modifyAllCommentsToBeShown()
 	res.render('home.ejs', {user: req.session?.user, login: req.session?.login});
 });
 

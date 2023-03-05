@@ -15,14 +15,11 @@ export const postSignin = (req, res, next) => {
   }
 
   // the result must be user information(object)
-  console.log(result, message);
   
-  // TO DO: useing session
 
   // put userInfo in session, login state as well.
 
   req.session.login = true;
   req.session.user = {...result}
-  
-	return res.redirect('/');
+  	return res.redirect('/');
 };

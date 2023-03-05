@@ -1,4 +1,5 @@
 import User from '../models/user.js';
+import { existUserByCondition } from './dbfactory.js';
 import { createUniqueId } from './factory.js';
 
 /*
@@ -37,7 +38,14 @@ export const createUser = (body) => {
 		return result;
 	}
 
-	// Third: Create new Account -> means all conditions are right
+	// Third: Check if the accountId is duplicated with others.
+	if(existUserByCondition({accountId: id})){
+		result.result = false;
+		result.description = "account id is duplicated! fuck youy!"
+		return result;
+	}
+
+	// Fourth: Create new Account -> means all conditions are right
 	const uniqueId = createUniqueId();
 	const newUser = {
 		id: uniqueId,

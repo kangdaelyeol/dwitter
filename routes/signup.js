@@ -15,6 +15,6 @@ export const postSignup = (req, res, next) => {
 		res.redirect('/');
 	} else {
 		console.log('false', result.description);
-		res.redirect("/login");
+		res.redirect("/signin");
 	}
 };
