@@ -3,6 +3,7 @@ import { getSignin, postSignin } from './routes/signin.js';
 import { getSignup, postSignup } from './routes/signup.js';
 import { getSignout } from './routes/signout.js';
 import { postComment } from './routes/comment.js';
+import { modifyCommentsToBeShown } from './controllers/commentController.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import multer from "multer";
@@ -41,8 +42,7 @@ app.set('view engine', 'ejs');
 app.use('/src', express.static(path.join(__dirname, 'views', 'src')));
 
 app.get('/', (req, res) => {
-   console.dir(req.session)
-   const comments = modifyAllCommentsToBeShown()
+   const comments = modifyCommentsToBeShown()
 	res.render('home.ejs', {user: req.session?.user, login: req.session?.login});
 });
 

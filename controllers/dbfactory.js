@@ -56,6 +56,7 @@ export const findUserById = (id) => {
   return user;
 }
 
+
 // it's for the createComment Function,
 // because when a comment obj is created, the information has to be added to the userInfo,
 // in the comments Array.
@@ -118,5 +119,65 @@ export const getComments = (userId) => {
   }
 
 
+  return newComments;
+}
+
+
+
+/** function: populateComments
+ *  description: it's about the function for "comments" model,
+ * in order for the owner(uniqueId) to be changed into User information,
+ * it has to be progressed in the dbfactory.js to get Users model
+ * required params: comments (D_Model)
+ * returning value: comments poplated with users
+ */
+
+
+/* comments schema
+  id: String (Unique)
+  content: String
+  createdAt: number (Date.now())
+    -> have to make the function that show the current moment directly seperately
+  owner: String (ref:user)
+*/
+
+// it's a function for populateComments
+// , searching the corresponding user data according to uniqueId
+const findUserByUniqueId = (id) => {
+  const result = Object.keys(Users).find((key) => {
+    const uacid = key
+    if(String(uacid) === String(id)) return true;
+    return false;    
+  })
+
+  if(!result) return false;
+
+  // the value of result is uniqueId
+  const user = {
+    ...Users[`${result}`],
+    comments: [...Users[`${result}`].comments]
+  }
+
+  return user;
+}
+
+export const populateComments = (comments) => {
+  const newComments = {}; // return value
+
+  // do deep-copy comments
+
+  Object.keys(comments).forEach(k => {
+    newComments[`${k}`] = {
+      ...comments[`${k}`]
+    }
+
+    // change owner value to the corresponding user data accroding to the id value.
+    // make the most of findUserById(containing deep-copy)
+
+    const ownerValue = newComments[`${k}`].owner; // uniqueID
+    newComments[`${k}`].owner = findUserByUniqueId(ownerValue);
+
+  });
+  
   return newComments;
 }

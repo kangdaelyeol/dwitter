@@ -1,5 +1,5 @@
 
-/* message schema
+/* comments schema
   id: String (Unique)
   content: String
   createdAt: number (Date.now())

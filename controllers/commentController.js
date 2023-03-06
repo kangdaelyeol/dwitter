@@ -3,12 +3,13 @@
 // description: to take 2 param(commentValue: String, userID(StringId)
 
 import { createComment, getComments } from "./dbfactory.js"
+import { populateComments } from "./dbfactory.js";
 
-// andthen make the comment data and put it in DB
+// and then make the comment data and put it in DB
 export const makeComment = (comment, userId) => {
   // have to name the keys as you define the keys of DB Model
   if(!comment || !userId) {
-    console.log("comment or userId doesn't exist", comment, userId);
+    console.log("comment or userId doesn't exist fuck you!", comment, userId);
     return;
   }
   
@@ -43,5 +44,12 @@ export const modifyCommentsToBeShown = (userId) => {
   // To Do: make function (populateComments) in "dbfactory.js"
   //        you have to make the logic that changes owner in comment into User information.
   
-  const result = populateComments(comments);
+  const populatedComments = populateComments(comments);
+  // modify populated data as the format of data that's suitable for showing to clients.
+
+  console.log("populated Comments: ",populatedComments);
+
+  // make it in factory.js
+  const showingData = finalModifyComments(populatedComments)
+
 }
