@@ -9,5 +9,5 @@ export const postComment = (req ,res, next) => {
   console.log(req.session)
   makeComment(comment, userId);
   console.log(comments);
-  return res.sendStatus(201);
+  return res.status(201).redirect("/");
 }

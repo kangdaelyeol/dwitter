@@ -4,6 +4,7 @@
 
 import { createComment, getComments } from "./dbfactory.js"
 import { populateComments } from "./dbfactory.js";
+import { finalModifyComments } from "./factory.js";
 
 // and then make the comment data and put it in DB
 export const makeComment = (comment, userId) => {
@@ -13,12 +14,7 @@ export const makeComment = (comment, userId) => {
     return;
   }
   
-  // TO DO - make createComment in dbfactory.js for comment Model
-  // unique Id, CreateAt must be made in the function seperately
-  // because it's the DB's role. in this part, it doesnt have to make it, it's not logical.
-
-  createComment(comment, userId)
-  
+  createComment(comment, userId);
 }
 
 
@@ -47,9 +43,9 @@ export const modifyCommentsToBeShown = (userId) => {
   const populatedComments = populateComments(comments);
   // modify populated data as the format of data that's suitable for showing to clients.
 
-  console.log("populated Comments: ",populatedComments);
 
   // make it in factory.js
-  const showingData = finalModifyComments(populatedComments)
+  const showingData = finalModifyComments(populatedComments);
+  return showingData;
 
 }

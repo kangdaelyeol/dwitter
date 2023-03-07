@@ -53,7 +53,7 @@ export const createUser = (body) => {
 		password,
 		nickname,
 		comments: [],
-		profile: 'no images',
+		profile: 'no_image',
 	};
 	User[`${uniqueId}`] = { ...newUser, comments: [...newUser.comments] };
 	return result;

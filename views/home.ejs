@@ -24,7 +24,29 @@
 			</form>
 		</div>
 		<div class="comments">
-		<%- include("includes/dweets"); %>
+			<div class="comments">
+				<% Object.keys(comments).forEach(key => { %>
+					<div class="comment">
+						<div class="comment__left">
+							<img class="comment__profile" src=<%= comments[`${key}`].profile %> alt="profile">
+						</div>
+						<div class="comment__right">
+							<div class="comment__top">
+								<span class="comment__nickname">nickName: <%= comments[`${key}`].nickname %></span>
+								<span class="comment__userid">id_<%= comments[`${key}`].ownerId %></span>
+								<span class="comment__createat">createAt:<%= comments[`${key}`].createAt %></span>
+							</div>
+							<div class="comment__bottom">
+								<span class="comment__content"><%= comments[`${key}`].content %></span>
+							</div>
+						</div>
+						<% if(user?.id === comments[`${key}`].ownerId) { %>
+							<div class="comment__delete"><a href=<%=`/delete/${key}`%>>DELETE</a></div>
+							<div class="comment__edit">EDIT</div>
+						<% } %>
+					</div>
+					<% }); %>
+				</div>
 		</div>
 		<h1>hello world</h1>
 	</body>

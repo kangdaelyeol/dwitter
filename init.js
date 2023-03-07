@@ -3,12 +3,13 @@ import { getSignin, postSignin } from './routes/signin.js';
 import { getSignup, postSignup } from './routes/signup.js';
 import { getSignout } from './routes/signout.js';
 import { postComment } from './routes/comment.js';
-import { modifyCommentsToBeShown } from './controllers/commentController.js';
+import { getHome } from './routes/home.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import multer from "multer";
 import cookieParser from 'cookie-parser';
 import sessions from "express-session";
+import { getDelete } from './routes/delete.js';
 
 /*
    definition of variuables for path
@@ -41,18 +42,15 @@ app.use(sessionOptions);
 app.set('view engine', 'ejs');
 app.use('/src', express.static(path.join(__dirname, 'views', 'src')));
 
-app.get('/', (req, res) => {
-   const comments = modifyCommentsToBeShown()
-	res.render('home.ejs', {user: req.session?.user, login: req.session?.login});
-});
-
+// Routes
+app.route("/").get(getHome);
 app.route('/signup').get(getSignup).post(postSignup);
 app.route('/signin').get(getSignin).post(postSignin);
 app.route("/signout").get(getSignout);
 app.route("/comment").post(postComment);
+app.route("/delete/:id").get(getDelete);
 
 // if it's wrong access
-
 app.use((req, res) => {
 	res.sendStatus(404);
 });
