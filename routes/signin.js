@@ -1,4 +1,3 @@
-import { createUniqueId } from '../controllers/factory.js';
 import { signinCheck } from '../controllers/signincontroller.js';
 export const getSignin = (req, res, next) => {
 	return res.render('signin');

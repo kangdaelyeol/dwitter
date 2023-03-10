@@ -11,9 +11,7 @@ import { createUniqueId } from './factory.js';
 export const existUserById = (id) => {
 	console.log('existUserByID', id);
 	const everyCB = (key) => {
-		console.log(key);
 		const uacid = Users[key].accountId;
-		console.log(uacid, id);
 		if (uacid === id) return true;
 		return false;
 	};
@@ -28,11 +26,9 @@ export const existUserById = (id) => {
 export const existUserByCondition = (cond) => {
 	const key = Object.keys(cond)[0];
 	const value = cond[`${key}`];
-	console.log(key, value);
 	const result = Object.keys(Users).some((k) => {
 		return Users[`${k}`][`${key}`] === value;
 	});
-	console.log(result);
 	return result;
 };
 
@@ -42,6 +38,24 @@ export const findUserById = (id) => {
 	const result = Object.keys(Users).find((key) => {
 		const uacid = Users[key].accountId;
 		if (uacid === id) return true;
+		return false;
+	});
+
+	if (!result) return false;
+
+	// the value of result is uniqueId
+	const user = {
+		...Users[`${result}`],
+		comments: [...Users[`${result}`].comments],
+	};
+
+	return user;
+};
+
+export const getUserById = (id) => {
+	const result = Object.keys(Users).find((key) => {
+		const uid = Users[key].id;
+		if (uid === Number(id)) return true;
 		return false;
 	});
 
@@ -174,4 +188,34 @@ export const populateComments = (comments) => {
 	});
 
 	return newComments;
+};
+
+/** function: getCommentById
+ * description: get uniqueId and search the comment data according to the id value.
+ * if the corresponding Comment data doesn't exist, gonna return false.
+ */
+export const getCommentById = (id) => {
+	let result = false;
+	Object.keys(Comments).forEach((k) => {
+		if (String(id) === k) result = { ...Comments[`${k}`] };
+	});
+
+	return result;
+};
+
+/**function: deleteCommentById
+ * description: delete the corresponding comment object,
+ * also the comment id hava to be removed in the comments Array in the user informaiton.
+ */
+export const deleteCommentById = (id, userId) => {
+  console.log("typeof id, userid", typeof id, typeof userId);
+	delete Comments[`${id}`];
+  // remove the value
+  
+  const newCommentArray = Users[`${userId}`].comments.filter(k => {
+    return k !== id;
+  });
+  console.log(newCommentArray);
+  Users[`${userId}`].comments = newCommentArray;
+	return;
 };
