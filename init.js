@@ -4,6 +4,9 @@ import { getSignup, postSignup } from './routes/signup.js';
 import { getSignout } from './routes/signout.js';
 import { postComment } from './routes/comment.js';
 import { getHome } from './routes/home.js';
+import { getEdit, postEdit } from './routes/edit.js';
+import { getMytweet } from './routes/mytweet.js';
+import { getAlltweet } from './routes/alltweet.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import multer from "multer";
@@ -49,6 +52,9 @@ app.route('/signin').get(getSignin).post(postSignin);
 app.route("/signout").get(getSignout);
 app.route("/comment").post(postComment);
 app.route("/delete/:id").get(getDelete);
+app.route("/edit/:id").get(getEdit).post(postEdit);
+app.route("/alltweets").get(getAlltweet)
+app.route("/mytweets").get(getMytweet)
 
 // if it's wrong access
 app.use((req, res) => {

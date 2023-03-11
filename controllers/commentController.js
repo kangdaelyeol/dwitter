@@ -24,6 +24,7 @@ cause somethine has to be modified and also there's datas that don't need to be 
 to client.
 */
 export const modifyCommentsToBeShown = (userId) => {
+  console.log("received userId: ", userId);
   /* to define the form of comment to be sent to client and show it with ease
      some information need to be changed (populate)
      in order for the owner information in the comments to be turned into accountId,

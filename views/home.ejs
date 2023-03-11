@@ -17,17 +17,19 @@
 	</head>
 	<body>
 		<%- include("includes/header"); %>
-		<div class="makingcomment">
-			<form class="commment__form" method="post" action="/comment" >
-				<input type="text" id="comment" name="comment" placeholder="=Comment" required />
-				<input type="submit" value="Submit!" />
-			</form>
-		</div>
+		<% if (login === true) { %>
+			<div class="makingcomment">
+				<form class="commment__form" method="post" action="/comment" >
+					<input type="text" id="comment" name="comment" placeholder="=Comment" required />
+					<input type="submit" value="Submit!" />
+				</form>
+			</div>
+		<% } %>
 		<div class="comments">
 			<div class="comments">
 				<% Object.keys(comments).forEach(key => { %>
 					<div class="comment">
-						<div class="comment__left">
+						<div class="comment__l1eft">
 							<img class="comment__profile" src=<%= comments[`${key}`].profile %> alt="profile">
 						</div>
 						<div class="comment__right">
@@ -42,12 +44,11 @@
 						</div>
 						<% if(user?.id === comments[`${key}`].ownerId) { %>
 							<div class="comment__delete"><a href=<%=`/delete/${key}`%>>DELETE</a></div>
-							<div class="comment__edit">EDIT</div>
+							<div class="comment__edit"><a href=<%=`/edit/${key}`%>>Edit</a></div>
 						<% } %>
 					</div>
 					<% }); %>
 				</div>
 		</div>
-		<h1>hello world</h1>
 	</body>
 </html>

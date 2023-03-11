@@ -121,7 +121,7 @@ export const getComments = (userId) => {
 		Object.keys(Comments).forEach((key) => {
 			// the userId(unique Numner) must be 'owner' property
 			const userIdOfComment = Comments[`${key}`].owner;
-			if (userId === userIdOfComment) return;
+			if (Number(userId) !== Number(userIdOfComment)) return;
 			else {
 				const comment = {
 					...Comments[`${key}`],
@@ -219,3 +219,8 @@ export const deleteCommentById = (id, userId) => {
   Users[`${userId}`].comments = newCommentArray;
 	return;
 };
+
+export const changeComment = (id, content) => {
+  Comments[`${id}`].content = content;
+  return;
+}

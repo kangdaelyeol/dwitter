@@ -19,11 +19,19 @@ import { modifyCommentsToBeShown } from '../controllers/commentController.js';
  */
 
 export const getHome = (req, res, next) => {
-	const comments = modifyCommentsToBeShown();
-  console.log(req.session?.user);
+	let comments
+
+  // the showing mode is up to mytwwets.
+  if(req.session.mytweets){
+    comments = modifyCommentsToBeShown(req.session?.user?.id);
+  } else {
+    comments = modifyCommentsToBeShown();
+  }
+
 	res.render('home.ejs', {
 		user: req.session?.user,
 		login: req.session?.login,
-    comments
+    comments,
+    mytweets: req.session?.mytweets
 	});
 };

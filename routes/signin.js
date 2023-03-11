@@ -20,5 +20,7 @@ export const postSignin = (req, res, next) => {
 
   req.session.login = true;
   req.session.user = {...result}
+  // firstly, app have to show Alltweets
+  req.session.mytweet = false;
   	return res.redirect('/');
 };
